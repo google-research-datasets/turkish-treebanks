@@ -14,7 +14,6 @@
 # limitations under the License.
 """Functions to read Turkish Web Treebank sentences."""
 
-import collections
 import io
 from typing import Generator, Iterable, List, NamedTuple, Optional, Tuple
 
