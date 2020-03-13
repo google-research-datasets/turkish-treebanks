@@ -6,6 +6,34 @@ A human-annotated morpho-syntactic treebank for Turkish.
 
 This is not an official Google product.
 
+## Dataset Metadata
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <table>
+    <tr>
+      <th>property</th>
+      <th>value</th>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td><code itemprop="name">Turkish Web Treebank</code></td>
+    </tr>
+    <tr>
+      <td>description</td>
+      <td><code itemprop="description">A human-annotated morpho-syntactic
+      treebank for Turkish</code></td>
+    </tr>
+    <tr>
+      <td>sameAs</td>
+      <td><code itemprop="sameAs">https://github.com/google-research-datasets/turkish-treebanks</code></td>
+    </tr>
+    <tr>
+      <td>license</td>
+      <td><code itemprop="license">http://www.apache.org/licenses/LICENSE-2.0.txt</code></td>
+    </tr>
+  </table>
+</div>
+
 ## Dataset Description
 
 Turkish Web Treebank (TWT) consists of 4,851 sentences (66,466 words, and
