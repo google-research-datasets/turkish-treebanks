@@ -11,17 +11,13 @@ This is not an official Google product.
 <div itemscope itemtype="http://schema.org/Dataset">
   <table>
     <tr>
-      <th>property</th>
-      <th>value</th>
-    </tr>
-    <tr>
       <td>name</td>
       <td><code itemprop="name">Turkish Web Treebank</code></td>
     </tr>
     <tr>
       <td>description</td>
       <td><code itemprop="description">A human-annotated morpho-syntactic
-      treebank for Turkish</code></td>
+      treebank for Turkish.</code></td>
     </tr>
     <tr>
       <td>sameAs</td>
