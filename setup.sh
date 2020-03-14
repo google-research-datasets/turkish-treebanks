@@ -1,3 +1,4 @@
+#! /bin/sh
 # Copyright 2020 The Google Research Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,17 +13,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package(default_visibility = ["//visibility:public"])
-
-exports_files(["LICENSE"])
-
-sh_binary(
-    name = "setup",
-    srcs = ["setup.sh"],
-    data = [
-        "LICENSE",
-        "setup.py",
-        "//turkish_treebanks:__init__.py",
-        "//turkish_treebanks:read",
-    ],
-)
+cd "${0}.runfiles/turkish_treebanks"
+python3 setup.py "$@"
