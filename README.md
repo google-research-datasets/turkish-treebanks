@@ -166,8 +166,8 @@ git_repository(
 )
 ```
 
-Then, you can simply use `@turkish-treebanks//lib:read` as a dependecy of your
-relevant `py_library` or `py_binary` BUILD targets.
+Then, you can simply use `@turkish-treebanks//turkish_treebanks:read` as a
+dependecy of your relevant `py_library` or `py_binary` BUILD targets.
 
 The API is also available on PyPi. To install the latest release from PyPi, run:
 
