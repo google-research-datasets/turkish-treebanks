@@ -162,7 +162,7 @@ dependency of your project by adding the following to your WORKSPACE file:
 git_repository(
   name = "turkish-treebanks",
   remote = "https://github.com/google-research-datasets/turkish-treebanks.git",
-  tag = "{`version-tag`}",
+  tag = "{version-tag}",
 )
 ```
 

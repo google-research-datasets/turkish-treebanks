@@ -18,7 +18,7 @@ import setuptools
 setuptools.setup(
     name="turkish-treebanks",
     version="1.0.0",
-    description="Turkish Web Treebank"
+    description="Turkish Web Treebank",
     long_description=("A Python API to read annotations of the Turkish Web"
                       " Treebank (TWT)"),
     url="https://github.com/google-research-datasets/turkish-treebanks",
