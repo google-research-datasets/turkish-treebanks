@@ -1,6 +1,6 @@
-# Turkish Treebank
+# Turkish Treebanks
 
-![](ttps://github.com/google-research-datasets/turkish-treebanks/workflows/Build%20Status/badge.svg)
+![](https://github.com/google-research-datasets/turkish-treebanks/workflows/Build%20Status/badge.svg)
 
 A human-annotated morpho-syntactic treebank for Turkish.
 
@@ -151,9 +151,9 @@ whitespace segmented from the following ones in source text. We mark them with
 
 ## Tools and Usage
 
-Together with the dataset we also provide a [simple Python API][5] that can be
-used to read annotated sentences (per web or Wikipedia sections and/or "train",
-"dev", "test" splits).
+Together with the dataset we also provide a [Python API][5] that can be used to
+read annotated sentences (per web or Wikipedia sections and/or "train", "dev",
+"test" splits).
 
 If you are using [Bazel][8], you can depend on this repository as an external
 dependency of your project by adding the following to your WORKSPACE file:
@@ -161,20 +161,34 @@ dependency of your project by adding the following to your WORKSPACE file:
 ```
 git_repository(
   name = "turkish-treebanks",
-  branch = "master",
   remote = "https://github.com/google-research-datasets/turkish-treebanks.git",
+  tag = "{`version-tag`}",
 )
 ```
 
 Then, you can simply use `@turkish-treebanks//lib:read` as a dependecy of your
 relevant `py_library` or `py_binary` BUILD targets.
 
+The API is also available on PyPi. To install the latest release from PyPi, run:
+
+```
+python3 -m pip install turkish-treebanks
+```
+
+To install from source, run below from the project root directory (preferably
+within a Python virtual environment):
+
+```
+bazel build //...
+bazel-bin/setup install
+```
+
 ## Requirements
 
 To build and run the tools install [Bazel version 2.2.0][9],
 [Python 3.7.5 (or a newer version)][10]. All other intrinsic dependencies will
 be imported, built and taken care of by Bazel according to the [WORKSPACE][2]
-setup.
+setup. If you are installing from PyPi, you need [pip][12].
 
 ## Citing
 
@@ -208,10 +222,11 @@ Unless otherwise noted, all original files are licensed under
 [2]: ./WORKSPACE
 [3]: ./data/web.conllu
 [4]: ./data/wiki.conllu
-[5]: ./lib/read.py
+[5]: ./turkish_treebanks/read.py
 [6]: https://universaldependencies.org/format.html
 [7]: https://github.com/google-research/turkish-morphology
 [8]: https://bazel.build/
 [9]: https://docs.bazel.build/versions/master/install.html
 [10]: https://www.python.org/downloads/
 [11]: #tools-and-usage
+[12]: https://pip.pypa.io/en/stable/installing/
