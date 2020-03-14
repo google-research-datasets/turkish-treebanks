@@ -35,7 +35,7 @@ _VALID_SPLIT_NAMES = [
 
 class Feature(NamedTuple):
   """Decomposed features of a token."""
-  name: str
+  category: str
   value: str
 
 
@@ -174,8 +174,8 @@ def _decompose_sentence(sentence: str) -> Sentence:
 
   def _decompose_features(raw_features: str) -> Tuple[Feature, ...]:
     """Parses CoNLL-U format features annotations into Feature objects."""
-    name_value = (f.split("=") for f in raw_features.split("|") if f != "_")
-    return tuple(Feature(name=n, value=v) for n, v in name_value)
+    category_value = (f.split("=") for f in raw_features.split("|") if f != "_")
+    return tuple(Feature(category=n, value=v) for n, v in category_value)
 
   def _decompose_token(line: str) -> Token:
     """Parses CoNLL-U format token annotations into Token objects."""

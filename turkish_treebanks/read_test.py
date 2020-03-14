@@ -228,14 +228,15 @@ class SentencesTest(parameterized.TestCase):
         coarse_tag="NOUN",
         fine_tag="NN",
         features=(
-            read.Feature(name="PersonNumber", value="A3sg"),
-            read.Feature(name="Possessive", value="Pnon"),
-            read.Feature(name="Case", value="Bare"),
-            read.Feature(name="Proper", value="False"),
+            read.Feature(category="PersonNumber", value="A3sg"),
+            read.Feature(category="Possessive", value="Pnon"),
+            read.Feature(category="Case", value="Bare"),
+            read.Feature(category="Proper", value="False"),
         ),
         head=2,
         dependency_relation="ig",
-        miscellaneous_features=(read.Feature(name="SpaceAfter", value="No"),),
+        miscellaneous_features=(read.Feature(category="SpaceAfter",
+                                             value="No"),),
     )
     actual_token = sentences[1].token[0]
     self.assertEqual(expected_token, actual_token)
