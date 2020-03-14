@@ -16,11 +16,15 @@
 """Functions to read Turkish Web Treebank sentences."""
 
 import io
+import os
+import pathlib
 from typing import Generator, Iterable, List, NamedTuple, Optional, Tuple
 
+_ROOT_DIR = pathlib.Path(__file__).parent.parent
+_DATA_DIR = os.path.join(_ROOT_DIR, "data")
 _PATHS_BY_SECTION = {
-    "web": "data/web.conllu",
-    "wiki": "data/wiki.conllu",
+    "web": os.path.join(_DATA_DIR, "web.conllu"),
+    "wiki": os.path.join(_DATA_DIR, "wiki.conllu"),
 }
 _VALID_SPLIT_NAMES = [
     "train",

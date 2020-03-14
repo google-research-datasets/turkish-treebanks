@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for lib.read."""
+"""Tests for turkish_treebanks.read."""
 
-from lib import read
+from turkish_treebanks import read
 
 from absl.testing import absltest
 from absl.testing import parameterized
