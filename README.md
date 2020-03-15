@@ -48,8 +48,8 @@ sampling a sentence from 2,310 Turkish Wikipedia pages and annotating them.
 In terms of splits, in our experiments, we use every 9th sentence in above
 linked CoNLL-U format files as the development set, and every 10th sentence as
 the test set. All other sentences belong to the training set. We advise you to
-do the same for comparable results. [Tools and Usage][11] describes the tools
-that you can use to retrieve the splits.
+do the same for comparable results. [Python API][11] section describes the
+library that you can use to retrieve the splits.
 
 ### Data format
 
@@ -84,7 +84,6 @@ sağladığı haklar...*" in CoNNL-U format as we use it.
 | 7      | dığı     | _         | ADJ      | VJ       | Derivation=PastPart\|Possessive=P3sg\|Proper=False                          | 8        | rcmod      | _        | _             |
 | 8      | haklar   | hak       | NOUN     | NN       | PersonNumber=A3sg\|Possessive=Pnon\|Case=Bare\|Proper=False                 | 0        | root       | _        | SpaceAfter=No |
 | 9      | ...      | ...       | PUNCT    | .        | Proper=False                                                                | 8        | p          | _        | _             |
-
 
 ### Annotations
 
@@ -149,7 +148,7 @@ segmentation annotations as miscellaneous features on tokens which are not
 whitespace segmented from the following ones in source text. We mark them with
 "SpaceAfter=No" feature category-value pair.
 
-## Tools and Usage
+## Python API
 
 Together with the dataset we also provide a [Python API][5] that can be used to
 read annotated sentences (per web or Wikipedia sections and/or "train", "dev",
@@ -228,5 +227,5 @@ Unless otherwise noted, all original files are licensed under
 [8]: https://bazel.build/
 [9]: https://docs.bazel.build/versions/master/install.html
 [10]: https://www.python.org/downloads/
-[11]: #tools-and-usage
+[11]: #python-api
 [12]: https://pip.pypa.io/en/stable/installing/
