@@ -35,6 +35,17 @@ git_repository(
     tag = "pypi-v0.9.0",
 )
 
+# Google protocol buffers.
+git_repository(
+    name = "com_google_protobuf",
+    remote = "https://github.com/google/protobuf.git",
+    tag = "v3.11.4",
+)
+
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+
+protobuf_deps()
+
 # Bazel Python rules.
 git_repository(
     name = "rules_python",
