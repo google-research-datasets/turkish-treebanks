@@ -2,7 +2,7 @@
 
 ![](https://github.com/google-research-datasets/turkish-treebanks/workflows/Build%20Status/badge.svg)
 
-A human-annotated morpho-syntactic treebank for Turkish.
+A human-annotated morphosyntactic treebank for Turkish.
 
 This is not an official Google product.
 
@@ -16,7 +16,7 @@ This is not an official Google product.
     </tr>
     <tr>
       <td>description</td>
-      <td><code itemprop="description">A human-annotated morpho-syntactic
+      <td><code itemprop="description">A human-annotated morphosyntactic
       treebank for Turkish.</code></td>
     </tr>
     <tr>
