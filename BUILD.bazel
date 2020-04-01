@@ -24,5 +24,6 @@ sh_binary(
         "setup.py",
         "//turkish_treebanks:__init__.py",
         "//turkish_treebanks:read",
+        "//turkish_treebanks:twt_py_pb2",
     ],
 )
