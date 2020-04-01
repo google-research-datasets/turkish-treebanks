@@ -13,12 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Functions to read Turkish Web Treebank sentences."""
+"""Functions to read Turkish Web Treebank sentence annotations."""
 
-import io
 import os
 import pathlib
-from typing import Generator, Iterable, List, NamedTuple, Optional, Tuple
+from typing import Generator, Iterable, List, Optional
+
+from turkish_treebanks import twt_pb2
+
+_Feature = twt_pb2.Feature
+_Sentence = twt_pb2.Sentence
+_Tag = twt_pb2.Tag
+_Token = twt_pb2.Token
 
 _ROOT_DIR = pathlib.Path(__file__).parent.parent
 _DATA_DIR = os.path.join(_ROOT_DIR, "data")
@@ -33,40 +39,13 @@ _VALID_SPLIT_NAMES = [
 ]
 
 
-class Feature(NamedTuple):
-  """Decomposed features of a token."""
-  category: str
-  value: str
-
-
-class Token(NamedTuple):
-  """Decomposed token of a sentence."""
-  id_: int
-  form: str
-  lemma: str
-  coarse_tag: str
-  fine_tag: str
-  features: Tuple[Feature, ...]
-  head: int
-  dependency_relation: str
-  miscellaneous_features: Tuple[Feature, ...]
-  dependency_graph: str = None  # currently not in use.
-
-
-class Sentence(NamedTuple):
-  """Decomposed sentence of Turkish Web Treebank."""
-  id_: str
-  text: str
-  token: Tuple[Token, ...]
-
-
 def _whitespace_trimmed(string: str) -> str:
   """Strips any leading and trailing whitespace off from the string"""
   return string.lstrip().rstrip()
 
 
 def _split_into_sentences(conll: str) -> List[str]:
-  """Tokenizes contents of a CoNLL-U format file by sentences."""
+  """Tokenizes contents of a CoNLL-U format file by sentence annotations."""
   return [_whitespace_trimmed(s) for s in conll.split("\n\n")]
 
 
@@ -80,7 +59,7 @@ def _reconstruct_conll_from(sentences: Iterable[str]) -> str:
   return "\n\n".join(sentences)
 
 
-def _read_from(path: str) -> Generator[str, None, None]:
+def _read_sentences_from(path: str) -> Generator[str, None, None]:
   """Reads and yields sentences of a CoNLL-U format treebank file from the path.
 
   Args:
@@ -90,7 +69,7 @@ def _read_from(path: str) -> Generator[str, None, None]:
   Yields:
     Individual sentence annotations of a CoNLL-U format treebank file.
   """
-  with io.open(path, "r", encoding="utf-8") as reader:
+  with open(path, "r", encoding="utf-8") as reader:
     yield from _split_into_sentences(reader.read())
 
 
@@ -157,44 +136,42 @@ def _validate_sentence(sentence: str) -> None:
     _validate_token_line(line)
 
 
-def _decompose_sentence(sentence: str) -> Sentence:
-  """Parses CoNLL-U format sentence annotation in structured Sentence object.
+def _decompose_sentence(sentence: str) -> _Sentence:
+  """Parses CoNLL-U format sentence annotation in a sentence protobuf.
 
   Args:
     sentence: a CoNNL-U format sentence annotation.
 
   Returns:
-    A structured Sentence object which is a namedtuple that contains annotations
-    for a sentence that is parsed from CoNLL-U format sentence annotation.
+    Sentence protobuf that contains annotations for a sentence that is parsed
+    from CoNLL-U format sentence annotation.
   """
 
   def _decompose_comment(line: str, prefix: str) -> None:
     """Decomposes a comment line of CoNNL-U format."""
     return line[len(prefix):]
 
-  def _decompose_features(raw_features: str) -> Tuple[Feature, ...]:
+  def _decompose_features(raw_features: str) -> Generator[_Feature, None, None]:
     """Parses CoNLL-U format features annotations into Feature objects."""
     category_value = (f.split("=") for f in raw_features.split("|") if f != "_")
-    return tuple(Feature(category=n, value=v) for n, v in category_value)
+    yield from (_Feature(category=n, value=v) for n, v in category_value)
 
-  def _decompose_token(line: str) -> Token:
+  def _decompose_token(line: str) -> _Token:
     """Parses CoNLL-U format token annotations into Token objects."""
     column = line.split("\t")
-    return Token(
-        id_=int(column[0]),
+    return _Token(
         form=column[1],
         lemma=column[2],
-        coarse_tag=column[3],
-        fine_tag=column[4],
-        features=_decompose_features(column[5]),
+        tag=_Tag(coarse=column[3], fine=column[4]),
+        feature=_decompose_features(column[5]),
         head=int(column[6]),
         dependency_relation=column[7],
-        miscellaneous_features=_decompose_features(column[9]),
+        misc_feature=_decompose_features(column[9]),
     )
 
   lines = _split_into_lines(sentence)
-  return Sentence(
-      id_=_decompose_comment(lines[0], "# sent_id = "),
+  return _Sentence(
+      sentence_id=_decompose_comment(lines[0], "# sent_id = "),
       text=_decompose_comment(lines[1], "# text = "),
       token=tuple(_decompose_token(l) for l in lines[2:]),
   )
@@ -202,20 +179,21 @@ def _decompose_sentence(sentence: str) -> Sentence:
 
 def as_conllu(section: Optional[str] = None,
               split: Optional[str] = None) -> str:
-  """Reads sentences of Turkish Web Treebank in CoNLL-U format.
+  """Reads sentence annotations of Turkish Web Treebank in CoNLL-U format.
 
   Args:
-    section: optional, section of Turkish Web Treebank whose sentences will be
-        read (could be either 'web' or 'wiki'). If unspecified sentences from
-        web and Wikipedia sections will be read.
-    split: optional, treebank split whose sentences will be read (could be
-        'train', 'test', 'dev'). If unspecified sentences from all three splits
-        will be read.
+    section: optional, section of Turkish Web Treebank whose sentence
+        annotations will be read (could be either 'web' or 'wiki'). If
+        unspecified sentence annotations from web and Wikipedia sections will
+        be read.
+    split: optional, treebank split whose sentence annotations will be read
+        (could be 'train', 'test', 'dev'). If unspecified sentence annotations
+        from all three splits will be read.
 
   Raises:
     ValueError: invalid section name or split specifier, or source treebank
-        files from which the sentences are read is not valid with respect to
-        the CoNLL-U format.
+        files from which the sentence annotations are read is not valid with
+        respect to the CoNLL-U format.
 
   Returns:
     Sentence annotations for the specified treebank and split in CoNNL-U
@@ -236,7 +214,7 @@ def as_conllu(section: Optional[str] = None,
 
   def _filtered_sentences() -> Generator[str, None, None]:
     for path in sorted(paths):
-      for index, sentence in enumerate(_read_from(path)):
+      for index, sentence in enumerate(_read_sentences_from(path)):
         if _sentence_is_in_split(index, split):
           _validate_sentence(sentence)
           yield sentence
@@ -245,25 +223,26 @@ def as_conllu(section: Optional[str] = None,
 
 
 def sentences(section: Optional[str] = None,
-              split: Optional[str] = None) -> Generator[Sentence, None, None]:
-  """Reads and yields sentences of the Turkish Web Treebank.
+              split: Optional[str] = None) -> Generator[_Sentence, None, None]:
+  """Reads and yields sentences of Turkish Web Treebank as sentence protobufs.
 
   Args:
-    section: optional, section of Turkish Web Treebank whose sentences will be
-        read (could be either 'web' or 'wiki'). If unspecified sentences from
-        both web and Wikipedia sections will be read.
-    split: optional, treebank split whose sentences will be read (could be
-        'train', 'test', 'dev'). If unspecified sentences from all three splits
+    section: optional, section of Turkish Web Treebank whose sentence
+        annotations will be read (could be either 'web' or 'wiki'). If
+        unspecified sentence annotations from both web and Wikipedia sections
         will be read.
+    split: optional, treebank split whose sentence annotations will be read
+        (could be 'train', 'test', 'dev'). If unspecified sentence annotations
+        from all three splits will be read.
 
   Raises:
     ValueError: invalid section name or split specifier, or source treebank
-        files from which the sentences are read is not valid with respect to
-        the CoNLL-U format.
+        files from which the sentence annotations are read is not valid with
+        respect to the CoNLL-U format.
 
   Yields:
-    Structured sentence objects which contain annotations for the specified
-    treebank section and split.
+    Sentence protobufs which contain annotations for the specified treebank
+    section and split.
   """
   for sentence in _split_into_sentences(as_conllu(section, split)):
     yield _decompose_sentence(sentence)

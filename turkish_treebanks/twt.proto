@@ -1,0 +1,71 @@
+// Copyright 2020 The Google Research Authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// Protocol buffer specification for annotations of Turkish Web Treebank.
+
+syntax = "proto2";
+
+package turkish_treebanks;
+
+
+message Tag {
+  // Coarse part-of-speech tag.
+  optional string coarse = 1;
+
+  // Fine part-of-speech tag.
+  optional string fine = 2;
+}
+
+message Feature {
+  // Feature category.
+  optional string category = 1;
+
+  // Feature value.
+  optional string value = 2;
+}
+
+message Token {
+  // Surface form of the token, as it appears in the text.
+  optional string form = 1;
+
+  // Lemma (root, or stem) of the word. Only annotated for the first
+  // inflectional group tokens.
+  optional string lemma = 2;
+
+  // Part-of-speech tags.
+  optional Tag tag = 3;
+
+  // Morphological feature annotations.
+  repeated Feature feature = 4;
+
+  // Head of the token.
+  optional int32 head = 5;
+
+  // Universal dependency relation to the head.
+  optional string dependency_relation = 6;
+
+  // Miscellaneous feature annotations.
+  repeated Feature misc_feature = 7;
+}
+
+message Sentence {
+  // Sentence identifier.
+  optional string sentence_id = 1;
+
+  // Raw text of the sentence.
+  optional string text = 2;
+
+  // Token annotations of the sentence.
+  repeated Token token = 3;
+}

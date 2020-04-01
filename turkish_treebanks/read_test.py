@@ -15,7 +15,10 @@
 
 """Tests for turkish_treebanks.read."""
 
+import itertools
+
 from turkish_treebanks import read
+from turkish_treebanks import twt_pb2
 
 from absl.testing import absltest
 from absl.testing import parameterized
@@ -209,36 +212,36 @@ class SentencesTest(parameterized.TestCase):
   def test_reads_sentences(self, section, split, expected_sentence_count,
                            expected_token_count, expected_first_sentence_id,
                            expected_first_sentence_text):
-    sentences = tuple(read.sentences(section, split))
+    sentences = list(read.sentences(section, split))
     actual_sentence_count = len(sentences)
     self.assertEqual(expected_sentence_count, actual_sentence_count)
     actual_token_count = sum(len(s.token) for s in sentences)
     self.assertEqual(expected_token_count, actual_token_count)
-    actual_first_sentence_id = sentences[0].id_
+    actual_first_sentence_id = sentences[0].sentence_id
     self.assertEqual(expected_first_sentence_id, actual_first_sentence_id)
     actual_first_sentence_text = sentences[0].text
     self.assertEqual(expected_first_sentence_text, actual_first_sentence_text)
 
   def test_reads_tokens(self):
-    sentences = tuple(read.sentences())
-    expected_token = read.Token(
-        id_=1,
+    sentence = next(itertools.islice(read.sentences(), 1, None))
+    expected_token = twt_pb2.Token(
         form="Açık",
         lemma="açık",
-        coarse_tag="NOUN",
-        fine_tag="NN",
-        features=(
-            read.Feature(category="PersonNumber", value="A3sg"),
-            read.Feature(category="Possessive", value="Pnon"),
-            read.Feature(category="Case", value="Bare"),
-            read.Feature(category="Proper", value="False"),
+        tag=twt_pb2.Tag(
+            coarse="NOUN",
+            fine="NN",
+        ),
+        feature=(
+            twt_pb2.Feature(category="PersonNumber", value="A3sg"),
+            twt_pb2.Feature(category="Possessive", value="Pnon"),
+            twt_pb2.Feature(category="Case", value="Bare"),
+            twt_pb2.Feature(category="Proper", value="False"),
         ),
         head=2,
         dependency_relation="ig",
-        miscellaneous_features=(read.Feature(category="SpaceAfter",
-                                             value="No"),),
+        misc_feature=(twt_pb2.Feature(category="SpaceAfter", value="No"),),
     )
-    actual_token = sentences[1].token[0]
+    actual_token = sentence.token[0]
     self.assertEqual(expected_token, actual_token)
 
   @parameterized.named_parameters([
@@ -259,7 +262,7 @@ class SentencesTest(parameterized.TestCase):
   ])
   def test_raises_exception(self, section, split, exception, error):
     with self.assertRaisesRegexp(exception, error):
-      tuple(read.sentences(section, split))
+      next(read.sentences(section, split))
 
 
 if __name__ == "__main__":

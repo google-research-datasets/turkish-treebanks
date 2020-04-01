@@ -12,16 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
 load("@rules_python//python:defs.bzl", "py_library", "py_test")
 
 package(default_visibility = ["//visibility:public"])
 
 exports_files(["__init__.py"])
 
+py_proto_library(
+    name = "twt_py_pb2",
+    srcs = ["twt.proto"],
+    default_runtime = "@com_google_protobuf//:protobuf_python",
+    protoc = "@com_google_protobuf//:protoc",
+)
+
 py_library(
     name = "read",
     srcs = ["read.py"],
     data = [
+        ":twt_py_pb2",
         "//data:turkish_treebanks",
     ],
     srcs_version = "PY3",
@@ -35,6 +44,7 @@ py_test(
     srcs_version = "PY3",
     deps = [
         ":read",
+        ":twt_py_pb2",
         "@io_abseil_py//absl/testing:absltest",
         "@io_abseil_py//absl/testing:parameterized",
     ],
