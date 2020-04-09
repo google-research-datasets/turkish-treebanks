@@ -28,29 +28,37 @@ http_archive(
     ],
 )
 
-# Abseil Python common libraries.
-git_repository(
-    name = "io_abseil_py",
-    remote = "https://github.com/abseil/abseil-py.git",
-    tag = "pypi-v0.9.0",
-)
-
 # Google protocol buffers.
-git_repository(
+http_archive(
     name = "com_google_protobuf",
-    remote = "https://github.com/google/protobuf.git",
-    tag = "v3.11.4",
+    sha256 = "a79d19dcdf9139fa4b81206e318e33d245c4c9da1ffed21c87288ed4380426f9",
+    strip_prefix = "protobuf-3.11.4",
+    urls = [
+        "https://github.com/protocolbuffers/protobuf/archive/v3.11.4.tar.gz",
+    ],
 )
 
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 
 protobuf_deps()
 
+# Abseil Python common libraries.
+http_archive(
+    name = "io_abseil_py",
+    sha256 = "603febc9b95a8f2979a7bdb77d2f5e4d9b30d4e0d59579f88eba67d4e4cc5462",
+    strip_prefix = "abseil-py-pypi-v0.9.0",
+    urls = [
+        "https://github.com/abseil/abseil-py/archive/pypi-v0.9.0.tar.gz",
+    ],
+)
+
 # Bazel Python rules.
-git_repository(
+http_archive(
     name = "rules_python",
-    remote = "https://github.com/bazelbuild/rules_python.git",
-    tag = "0.0.1",
+    sha256 = "aa96a691d3a8177f3215b14b0edc9641787abaaa30363a080165d06ab65e1161",
+    urls = [
+        "https://github.com/bazelbuild/rules_python/releases/download/0.0.1/rules_python-0.0.1.tar.gz",
+    ],
 )
 
 load("@rules_python//python:repositories.bzl", "py_repositories")
