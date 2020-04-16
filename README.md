@@ -159,13 +159,14 @@ dependency of your project by adding the following to your WORKSPACE file:
 
 ```
 git_repository(
-  name = "turkish-treebanks",
+  name = "google_research_turkish_treebanks",
   remote = "https://github.com/google-research-datasets/turkish-treebanks.git",
   tag = "{version-tag}",
 )
 ```
 
-Then, you can simply use `@turkish-treebanks//turkish_treebanks:read` as a
+Then, you can simply use
+`@google_research_turkish_treebanks//turkish_treebanks:read` as a
 dependecy of your relevant `py_library` or `py_binary` BUILD targets.
 
 The API is also available on PyPi. To install the latest release from PyPi, run:
