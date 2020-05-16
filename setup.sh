@@ -13,5 +13,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cd "${0}.runfiles/turkish_treebanks"
+cd "${0}.runfiles/google_research_turkish_treebanks"
 python3 setup.py "$@"
