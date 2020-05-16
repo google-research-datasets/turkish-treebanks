@@ -33,12 +33,12 @@ This is not an official Google product.
 ## Dataset Description
 
 Turkish Web Treebank (TWT) consists of 4,851 sentences (66,466 words, and
-81,370 inflectional group tokenized tokens), which are manually annotated for
-segmentation, morphology, part-of-speech and dependency relations. It is
-composed of two sections: [web][3] and [Wikipedia][4]. Web section is built by
-sampling and annotating 2,541 sentences from a representative set of Turkish
-Forum, Blog, How-to, Review & Guides webpages. Wikipedia section is built by
-sampling a sentence from 2,310 Turkish Wikipedia pages and annotating them.
+81,370 inflectional groups), which are manually annotated for segmentation,
+morphology, part-of-speech and dependency relations. It is composed of two
+sections: [web][3] and [Wikipedia][4]. Web section is built by sampling and
+annotating 2,541 sentences from a representative set of Turkish Forum, Blog,
+How-to, Review & Guides webpages. Wikipedia section is built by sampling a
+sentence from 2,310 Turkish Wikipedia pages and annotating them.
 
 |           | Sentences | Words  | Tokens |
 |:--------  |:--------- |:------ |:------ |
@@ -194,17 +194,22 @@ setup. If you are installing from PyPi, you need [pip][12].
 
 If you use or discuss this dataset in your work, please cite:
 
-Kayadelen, T., Öztürel, A. & Bohnet, B. (2020). A Gold Standard Dependency
-Treebank for Turkish. In *Proceedings of the 12th Language Resources and
+Kayadelen, T., Öztürel, A. & Bohnet, B. (2020). [A Gold Standard Dependency
+Treebank for Turkish][13]. In *Proceedings of the 12th Language Resources and
 Evaluation Conference (LREC 2020)*.
 
 ```
-@inproceedings{
-  title = "A Gold Standard Dependency Treebank for Turkish",
-  author = "Kayadelen, Tolga and \"{O}zt\"{u}rel, Adnan and Bohnet, Bernd"
-  booktitle = "Proceedings of the 12th Language Resources and Evaluation
-      Conference (LREC 2020)",
-  year = "2020",
+@inproceedings{kayadelen-ozturel-bohnet:2020:LREC,
+  author = {Kayadelen, Tolga  and  \"{O}zt\"{u}rel, Adnan  and  Bohnet, Bernd},
+  title = {A Gold Standard Dependency Treebank for Turkish},
+  booktitle = {Proceedings of The 12th Language Resources and Evaluation
+    Conference},
+  month = {May},
+  year = {2020},
+  address = {Marseille, France},
+  publisher = {European Language Resources Association},
+  pages = {5158--5165},
+  url = {https://www.aclweb.org/anthology/2020.lrec-1.634}
 }
 ```
 
@@ -230,3 +235,4 @@ Unless otherwise noted, all original files are licensed under
 [10]: https://www.python.org/downloads/
 [11]: #python-api
 [12]: https://pip.pypa.io/en/stable/installing/
+[13]: http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.634.pdf
