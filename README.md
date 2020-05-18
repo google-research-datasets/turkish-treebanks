@@ -32,13 +32,14 @@ This is not an official Google product.
 
 ## Dataset Description
 
-Turkish Web Treebank (TWT) consists of 4,851 sentences (66,466 words, and
-81,370 inflectional groups), which are manually annotated for segmentation,
-morphology, part-of-speech and dependency relations. It is composed of two
-sections: [web][3] and [Wikipedia][4]. Web section is built by sampling and
-annotating 2,541 sentences from a representative set of Turkish Forum, Blog,
-How-to, Review & Guides webpages. Wikipedia section is built by sampling a
-sentence from 2,310 Turkish Wikipedia pages and annotating them.
+Turkish Web Treebank (TWT, ISLRN: 177-333-742-633-6) consists of 4,851
+sentences (66,466 words, and 81,370 inflectional groups), which are manually
+annotated for segmentation, morphology, part-of-speech and dependency relations.
+It is composed of two sections: [web][3] and [Wikipedia][4]. Web section is
+built by sampling and annotating 2,541 sentences from a representative set of
+Turkish Forum, Blog, How-to, Review & Guides webpages. Wikipedia section is
+built by sampling a sentence from 2,310 Turkish Wikipedia pages and annotating
+them.
 
 |           | Sentences | Words  | Tokens |
 |:--------  |:--------- |:------ |:------ |
