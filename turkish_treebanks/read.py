@@ -51,7 +51,7 @@ def _split_into_sentences(conll: str) -> List[str]:
 
 def _split_into_lines(sentence: str) -> List[str]:
   """Tokenizes CoNLL-U format sentence annotation into lines."""
-  return [_whitespace_trimmed(l) for l in sentence.split("\n")]
+  return [_whitespace_trimmed(line) for line in sentence.split("\n")]
 
 
 def _reconstruct_conll_from(sentences: Iterable[str]) -> str:
@@ -173,7 +173,7 @@ def _decompose_sentence(sentence: str) -> _Sentence:
   return _Sentence(
       sentence_id=_decompose_comment(lines[0], "# sent_id = "),
       text=_decompose_comment(lines[1], "# text = "),
-      token=tuple(_decompose_token(l) for l in lines[2:]),
+      token=tuple(_decompose_token(line) for line in lines[2:]),
   )
 
 
