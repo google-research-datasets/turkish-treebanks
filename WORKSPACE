@@ -21,20 +21,20 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 http_archive(
     name = "six_archive",
     build_file = "@//third_party:six.BUILD",
-    sha256 = "236bdbdce46e6e6a3d61a337c0f8b763ca1e8717c03b369e87a7ec7ce1319c0a",
-    strip_prefix = "six-1.14.0",
+    sha256 = "30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259",
+    strip_prefix = "six-1.15.0",
     urls = [
-        "https://pypi.python.org/packages/source/s/six/six-1.14.0.tar.gz",
+        "https://pypi.python.org/packages/source/s/six/six-1.15.0.tar.gz",
     ],
 )
 
 # Google protocol buffers.
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "946ba5371e423e1220d2cbefc1f65e69a1e81ca5bab62a03d66894172983cfcd",
-    strip_prefix = "protobuf-3.12.0",
+    sha256 = "512e5a674bf31f8b7928a64d8adf73ee67b8fe88339ad29adaa3b84dbaa570d8",
+    strip_prefix = "protobuf-3.12.4",
     urls = [
-        "https://github.com/protocolbuffers/protobuf/archive/v3.12.0.tar.gz",
+        "https://github.com/protocolbuffers/protobuf/archive/v3.12.4.tar.gz",
     ],
 )
 
