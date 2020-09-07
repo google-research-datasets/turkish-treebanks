@@ -31,10 +31,10 @@ http_archive(
 # Google protocol buffers.
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "512e5a674bf31f8b7928a64d8adf73ee67b8fe88339ad29adaa3b84dbaa570d8",
-    strip_prefix = "protobuf-3.12.4",
+    sha256 = "9b4ee22c250fe31b16f1a24d61467e40780a3fbb9b91c3b65be2a376ed913a1a",
+    strip_prefix = "protobuf-3.13.0",
     urls = [
-        "https://github.com/protocolbuffers/protobuf/archive/v3.12.4.tar.gz",
+        "https://github.com/protocolbuffers/protobuf/archive/v3.13.0.tar.gz",
     ],
 )
 
@@ -45,10 +45,10 @@ protobuf_deps()
 # Abseil Python common libraries.
 http_archive(
     name = "io_abseil_py",
-    sha256 = "603febc9b95a8f2979a7bdb77d2f5e4d9b30d4e0d59579f88eba67d4e4cc5462",
-    strip_prefix = "abseil-py-pypi-v0.9.0",
+    sha256 = "588a23406b2e28ea368897dbebc1210165414e87212d4fdd4b2ee968f0a772c6",
+    strip_prefix = "abseil-py-pypi-v0.10.0",
     urls = [
-        "https://github.com/abseil/abseil-py/archive/pypi-v0.9.0.tar.gz",
+        "https://github.com/abseil/abseil-py/archive/pypi-v0.10.0.tar.gz",
     ],
 )
 
