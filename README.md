@@ -225,7 +225,7 @@ Unless otherwise noted, all original files are licensed under
 [Apache License Version 2.0][1].
 
 [1]: ./LICENSE
-[2]: ./WORKSPACE
+[2]: ./WORKSPACE.bazel
 [3]: ./data/web.conllu
 [4]: ./data/wiki.conllu
 [5]: ./turkish_treebanks/read.py
