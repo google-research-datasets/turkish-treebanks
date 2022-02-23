@@ -1,6 +1,6 @@
 # Turkish Treebanks
 
-![](https://github.com/google-research-datasets/turkish-treebanks/workflows/Build%20Status/badge.svg)
+![](https://github.com/google-research-datasets/turkish-treebanks/workflows/Linux%20Build%20Status/badge.svg)
 
 A human-annotated morphosyntactic treebank for Turkish.
 
