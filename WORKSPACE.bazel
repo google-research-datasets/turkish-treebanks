@@ -17,12 +17,14 @@ workspace(name = "google_research_turkish_treebanks")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 # Google protocol buffers.
+protobuf_version = "3.21.9"
+
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "88231778cffebf93bc905e76ea757fae0f2ef497cc00f64973e41f1acd4fc781",
-    strip_prefix = "protobuf-3.20.2",
+    sha256 = "1add10f9bd92775b91f326da259f243881e904dd509367d5031d4c782ba82810",
+    strip_prefix = "protobuf-%s" % protobuf_version,
     urls = [
-        "https://github.com/protocolbuffers/protobuf/archive/v3.20.2.tar.gz",
+        "https://github.com/protocolbuffers/protobuf/archive/v%s.tar.gz" % protobuf_version,
     ],
 )
 
@@ -31,17 +33,25 @@ load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 protobuf_deps()
 
 # Bazel Python rules.
+rules_python_version = "0.13.0"
+
 http_archive(
     name = "rules_python",
-    sha256 = "b593d13bb43c94ce94b483c2858e53a9b811f6f10e1e0eedc61073bd90e58d9c",
-    strip_prefix = "rules_python-0.12.0",
-    url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.12.0.tar.gz",
+    sha256 = "8c8fe44ef0a9afc256d1e75ad5f448bb59b81aba149b8958f02f7b3a98f5d9b4",
+    strip_prefix = "rules_python-%s" % rules_python_version,
+    urls = [
+      "https://github.com/bazelbuild/rules_python/archive/refs/tags/%s.tar.gz" % rules_python_version,
+    ],
 )
 
 # PyPi dependencies.
-load("@rules_python//python:pip.bzl", "pip_install")
+load("@rules_python//python:pip.bzl", "pip_parse")
 
-pip_install(
-    name = "turkish_treebanks_deps",
+pip_parse(
+    name = "pypi",
     requirements = "//:requirements.txt",
 )
+
+load("@pypi//:requirements.bzl", "install_deps")
+
+install_deps()

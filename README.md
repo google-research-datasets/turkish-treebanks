@@ -186,7 +186,7 @@ bazel-bin/setup install
 
 ## Requirements
 
-To build and run the tools install [Bazel version 5.3.0][9] and
+To build and run the tools install [Bazel version 5.3.2][9] and
 [Python 3.10][10]. All other intrinsic dependencies will
 be imported, built and taken care of by Bazel according to the [WORKSPACE][2]
 setup. If you are installing from PyPi, you need [pip][12].
